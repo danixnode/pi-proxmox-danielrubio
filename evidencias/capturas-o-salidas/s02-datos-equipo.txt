@@ -1,0 +1,37 @@
+=== FECHA ===
+mar 13 oct 2026 09:51:29 CEST
+
+=== RAM (free -h) ===
+              total       usado       libre  compartido búfer/caché  disponible
+Memoria:       7,6Gi       1,2Gi       5,0Gi       261Mi       1,5Gi       5,9Gi
+Swap:         511Mi          0B       511Mi
+
+=== DISCO (df -h) ===
+S.ficheros     Tamaño Usados  Disp Uso% Montado en
+udev             3,8G      0  3,8G   0% /dev
+tmpfs            782M    12M  771M   2% /run
+/dev/sda2        458G    46G  391G  11% /
+tmpfs            3,9G      0  3,9G   0% /dev/shm
+tmpfs            5,0M   4,0K  5,0M   1% /run/lock
+tmpfs            3,9G      0  3,9G   0% /sys/fs/cgroup
+/dev/loop1        56M    56M     0 100% /snap/core18/2952
+/dev/loop2        64M    64M     0 100% /snap/core20/2582
+/dev/loop3        64M    64M     0 100% /snap/core20/2669
+/dev/loop0        56M    56M     0 100% /snap/core18/2959
+/dev/loop5        74M    74M     0 100% /snap/core22/2133
+/dev/loop6        67M    67M     0 100% /snap/core24/1225
+/dev/loop4        74M    74M     0 100% /snap/core22/1981
+/dev/loop7        67M    67M     0 100% /snap/core24/1643
+/dev/loop9       369M   369M     0 100% /snap/eclipse/134
+/dev/loop11       51M    51M     0 100% /snap/snapd/25577
+/dev/loop10       51M    51M     0 100% /snap/snapd/25202
+/dev/loop8       366M   366M     0 100% /snap/eclipse/127
+/dev/sda1        300M    11M  290M   4% /boot/efi
+tmpfs            782M    28K  782M   1% /run/user/1001
+/dev/sdb1        118G    25G   93G  22% /media/usuario/Ventoy
+
+=== KVM (ls -l /dev/kvm) ===
+crw-rw----+ 1 root kvm 10, 232 oct 13 09:36 /dev/kvm
+
+=== VIRTUALBOX ===
+7.0.12r159484

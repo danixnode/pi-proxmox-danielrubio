@@ -14,6 +14,16 @@ las evidencias utiles; evita frases generales como "he trabajado en Proxmox".
 - Incidencias y solucion o estado pendiente: No he tenido ningun tipo de incidencia.
 - Siguiente paso: Rellenar la memoria técnica, hacer el primer commit, subirlo a GitHub, dar acceso al profesor y entregar URL en Aules
 
+## Sesion 02 - 13/10/2026
+
+- Objetivo: investigar el hardware del PC de clase y responder a las tres preguntas de la Fase 1 (si puedo instalar Proxmox, qué limitaciones tendré y qué componentes son más críticos).
+- Acciones realizadas: Cambié el orden de arranque en la BIOS para iniciar con USB y arranqué Hiren's BootCD PE para sacar los modelos con CPU-Z, HWiNFO y CrystalDiskInfo. Ya en LliureX ejecuté free -h, df -h, ls -l /dev/kvm y VBoxManage --version. Consulté los requisitos y la página de descargas de Proxmox, la ficha de Intel del G4560, la ficha de Toshiba del disco y el manual de VirtualBox 7.0. Con todo eso rellené docs/01-inventario-hardware.md y subí las capturas a evidencias, tapando antes los números de serie y la MAC.
+- Decisiones y motivos: Voy en modalidad virtualizada con VirtualBox porque es un PC del departamento que no puedo borrar. Elijo Proxmox 9.2 por ser la última versión de la web. Le daré 5 GiB de RAM y 2 vCPU a la VM de Proxmox, porque el PC tiene 7,6 GiB y 4 hilos y LliureX ya gasta 1,2 GiB. Dejo LXC como plan B si falta memoria y pongo el SSD como mejora prioritaria. El dictamen es apto con condiciones.
+- Pruebas y resultados: Esperaba que la virtualización estuviera activada y /dev/kvm existe, así que sí lo está. free -h marca 7,6 GiB de RAM, df -h marca 391 GiB libres, VirtualBox 7.0.12 está instalado y CrystalDiskInfo da el disco como Good con 0 sectores dañados.
+- Documentos o evidencias: [Inventario y viabilidad](01-inventario-hardware.md) y [salida de los comandos](../evidencias/capturas-o-salidas/s02-datos-equipo.txt).
+- Incidencias y solucion o estado pendiente: Al guardar la salida de los comandos salió un aviso de operación no permitida, que creo que fue de df, pero el fichero se guardó completo. Las capturas del disco, la RAM y la red traían número de serie o MAC y las tapé antes de subirlas. Sigue pendiente probar la virtualización anidada en VirtualBox (necesito la VM de Proxmox) y medir la velocidad real del HDD.
+- Siguiente paso: Leer el apartado Processor Tab del manual de VirtualBox 7.0 y empezar docs/02-diagrama-red.md con el nombre del nodo, la subred del laboratorio y las IPs de srv-aso y cli-linux.
+
 Anadir una entrada con esta estructura en cada sesion. El historial de
 GitHub registra los commits; no hace falta incluir el hash del propio
 commit dentro de su entrada de bitacora.
