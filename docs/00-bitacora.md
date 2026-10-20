@@ -24,6 +24,16 @@ las evidencias utiles; evita frases generales como "he trabajado en Proxmox".
 - Incidencias y solucion o estado pendiente: Al guardar la salida de los comandos salió un aviso de operación no permitida, que creo que fue de df, pero el fichero se guardó completo. Las capturas del disco, la RAM y la red traían número de serie o MAC y las tapé antes de subirlas. Sigue pendiente probar la virtualización anidada en VirtualBox (necesito la VM de Proxmox) y medir la velocidad real del HDD.
 - Siguiente paso: Leer el apartado Processor Tab del manual de VirtualBox 7.0 y empezar docs/02-diagrama-red.md con el nombre del nodo, la subred del laboratorio y las IPs de srv-aso y cli-linux.
 
+## Sesion 03 - 20/10/2026
+
+- Objetivo: diseñar la red del laboratorio (Fase 2) hasta la tabla de direccionamiento, sin diagrama ni aislamiento.
+- Acciones realizadas: No pude asistir a clase, así que trabajé en casa con la teoría de redes virtuales del profesor y con lo que me pasaron mis compañeros (usar la red 192.168.56.X, elegir el número de host, DNS 8.8.8.8 y saltar el diagrama y el aislamiento). Rellené docs/02-diagrama-red.md con el nombre del nodo, la interfaz de gestión, los bridges vmbr0 y vmbr1, la subred 192.168.56.0/24, las IPs, el gateway y el DNS, los puertos y la tabla de direccionamiento. También actualicé la ficha inicial con el nombre del nodo y la red.
+- Decisiones y motivos: Uso dos bridges: vmbr0 con NAT para la salida a Internet y vmbr1 en solo-anfitrión para la gestión y las máquinas, porque así separo la salida de la red del laboratorio y no toco la red del centro. No uso VLAN porque no son obligatorias. Elegí los hosts .10, .20 y .30 como en la guía del profesor, y el DNS es 8.8.8.8.
+- Pruebas y resultados: no hay pruebas, todavía es solo diseño. Lo comprobaré al montar la red en la Fase 3.
+- Documentos o evidencias: [Diseño de red](02-diagrama-red.md).
+- Incidencias y solucion o estado pendiente: Ninguna. No hago el diagrama ni las medidas de aislamiento porque el profesor ha indicado que se saltan en esta parte.
+- Siguiente paso: Empezar la Fase 3 creando la VM de Proxmox en VirtualBox con los dos adaptadores (NAT y solo-anfitrión).
+
 Anadir una entrada con esta estructura en cada sesion. El historial de
 GitHub registra los commits; no hace falta incluir el hash del propio
 commit dentro de su entrada de bitacora.
