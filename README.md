@@ -33,7 +33,7 @@ Virtualizada: Proxmox VE dentro de una máquina virtual de VirtualBox, en mi PC 
 - [x] URL entregada y acceso docente comprobado
 - [x] Modalidad indicada
 - [x] Inventario
-- [ ] Diagrama de red
+- [X] Diagrama de red
 - [x] Instalacion Proxmox
 - [x] Configuracion base del nodo (puntos 1 y 2)
 - [ ] Plantilla Linux
