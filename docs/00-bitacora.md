@@ -4,38 +4,54 @@ La bitacora es el registro cronologico del trabajo. Anade una entrada al final
 de cada sesion y conserva las anteriores. Escribe datos comprobables y enlaza
 las evidencias utiles; evita frases generales como "he trabajado en Proxmox".
 
-## Sesion 01 - 23/09/2026
+## Sesion 01 - 22/09/2026
 
-- Objetivo: Iniciar GitHub y la documentacion Markdown.
-- Acciones realizadas: He creado el reposotorio en GitHub. He instalado Git (2.43.0) en el equipo Linux y configuré mi nombre y el correo noreply de GitHub. He generado una clave SSH y la añadí a mí cuenta. Y finalmente he ejecutado el script del profesor para crear la estrucutura del proyecto y he rellanado README y ficha inicial.
-- Decisiones y motivos: Para ir subiendo el proyecto a GitHub, he escogido SSH porque se configura una vez y luego no pide creendenciales. Además decidí usar el correo noreply para que mi email real no quede en el hisotrial de commits.
-- Pruebas y resultados: He comprobado la conexión con "ssh -T git@github.com" y me salió el mensaje de autenticación correcto saludandome con el nombre de mi usuario.
-- Documentos o evidencias: [Ficha inicial](00-ficha-inicial.md).
-- Incidencias y solucion o estado pendiente: No he tenido ningun tipo de incidencia.
-- Siguiente paso: Rellenar la memoria técnica, hacer el primer commit, subirlo a GitHub, dar acceso al profesor y entregar URL en Aules
+- Objetivo: crear el repositorio en GitHub y empezar la documentación en Markdown.
+- Acciones realizadas: Creé el repositorio `pi-proxmox-danielrubio`. En mi VM Linux instalé Git, configuré mi nombre y el correo noreply de GitHub, y creé una clave SSH que añadí a mi cuenta. Generé la estructura de carpetas con el script del profesor y rellené el README, la ficha inicial, esta bitácora y el inicio de la memoria. Por último hice el primer commit y lo subí.
+- Decisiones y motivos: Usé SSH en vez de un token porque se configura una vez y luego no pide nada más. Usé el correo noreply para que mi correo real no salga en los commits.
+- Pruebas y resultados: Con `ssh -T git@github.com` GitHub me reconoció. Después del `git push` el repositorio se veía en GitHub con el README y los enlaces funcionando.
+- Documentos o evidencias: [Ficha inicial](00-ficha-inicial.md) y [README](../README.md).
+- Incidencias y solucion o estado pendiente: El script no se ejecutaba porque al guardarlo le había quitado una letra al nombre (`rear_...` en vez de `crear_...`). Lo renombré con `mv` y funcionó.
+- Siguiente paso: investigar el hardware del equipo para la fase 1.
 
 ## Sesion 02 - 13/10/2026
 
-- Objetivo: investigar el hardware del PC de clase y responder a las tres preguntas de la Fase 1 (si puedo instalar Proxmox, qué limitaciones tendré y qué componentes son más críticos).
-- Acciones realizadas: Cambié el orden de arranque en la BIOS para iniciar con USB y arranqué Hiren's BootCD PE para sacar los modelos con CPU-Z, HWiNFO y CrystalDiskInfo. Ya en LliureX ejecuté free -h, df -h, ls -l /dev/kvm y VBoxManage --version. Consulté los requisitos y la página de descargas de Proxmox, la ficha de Intel del G4560, la ficha de Toshiba del disco y el manual de VirtualBox 7.0. Con todo eso rellené docs/01-inventario-hardware.md y subí las capturas a evidencias, tapando antes los números de serie y la MAC.
-- Decisiones y motivos: Voy en modalidad virtualizada con VirtualBox porque es un PC del departamento que no puedo borrar. Elijo Proxmox 9.2 por ser la última versión de la web. Le daré 5 GiB de RAM y 2 vCPU a la VM de Proxmox, porque el PC tiene 7,6 GiB y 4 hilos y LliureX ya gasta 1,2 GiB. Dejo LXC como plan B si falta memoria y pongo el SSD como mejora prioritaria. El dictamen es apto con condiciones.
-- Pruebas y resultados: Esperaba que la virtualización estuviera activada y /dev/kvm existe, así que sí lo está. free -h marca 7,6 GiB de RAM, df -h marca 391 GiB libres, VirtualBox 7.0.12 está instalado y CrystalDiskInfo da el disco como Good con 0 sectores dañados.
-- Documentos o evidencias: [Inventario y viabilidad](01-inventario-hardware.md) y [salida de los comandos](../evidencias/capturas-o-salidas/s02-datos-equipo.txt).
-- Incidencias y solucion o estado pendiente: Al guardar la salida de los comandos salió un aviso de operación no permitida, que creo que fue de df, pero el fichero se guardó completo. Las capturas del disco, la RAM y la red traían número de serie o MAC y las tapé antes de subirlas. Sigue pendiente probar la virtualización anidada en VirtualBox (necesito la VM de Proxmox) y medir la velocidad real del HDD.
-- Siguiente paso: Leer el apartado Processor Tab del manual de VirtualBox 7.0 y empezar docs/02-diagrama-red.md con el nombre del nodo, la subred del laboratorio y las IPs de srv-aso y cli-linux.
+- Objetivo: investigar el hardware y ver si se puede instalar Proxmox (fase 1).
+- Acciones realizadas: Usé el PC del departamento que nos dejó el profesor. Arranqué Hiren's BootCD PE desde un USB para ver los modelos con CPU-Z, HWiNFO y CrystalDiskInfo, y desde LliureX saqué la RAM, el disco, si existe `/dev/kvm` y la versión de VirtualBox. Consulté las webs de Proxmox, Intel, Toshiba y Oracle y con todo eso rellené el inventario.
+- Decisiones y motivos: Elegí la modalidad virtualizada con VirtualBox porque ese PC no se puede borrar. Puse como versión prevista Proxmox VE 9.2, que es la última de la web.
+- Pruebas y resultados: `/dev/kvm` existe, así que la virtualización estaba activada. El dictamen salió apto con condiciones, sobre todo por la poca RAM y el disco mecánico.
+- Documentos o evidencias: [Inventario y viabilidad](01-inventario-hardware.md).
+- Incidencias y solucion o estado pendiente: Varias capturas tenían números de serie y la MAC, y los tapé antes de subirlas.
+- Siguiente paso: diseñar la red del laboratorio.
 
 ## Sesion 03 - 20/10/2026
 
-- Objetivo: diseñar la red del laboratorio (Fase 2) hasta la tabla de direccionamiento, sin diagrama ni aislamiento.
-- Acciones realizadas: No pude asistir a clase, así que trabajé en casa con la teoría de redes virtuales del profesor y con lo que me pasaron mis compañeros (usar la red 192.168.56.X, elegir el número de host, DNS 8.8.8.8 y saltar el diagrama y el aislamiento). Rellené docs/02-diagrama-red.md con el nombre del nodo, la interfaz de gestión, los bridges vmbr0 y vmbr1, la subred 192.168.56.0/24, las IPs, el gateway y el DNS, los puertos y la tabla de direccionamiento. También actualicé la ficha inicial con el nombre del nodo y la red.
-- Decisiones y motivos: Uso dos bridges: vmbr0 con NAT para la salida a Internet y vmbr1 en solo-anfitrión para la gestión y las máquinas, porque así separo la salida de la red del laboratorio y no toco la red del centro. No uso VLAN porque no son obligatorias. Elegí los hosts .10, .20 y .30 como en la guía del profesor, y el DNS es 8.8.8.8.
-- Pruebas y resultados: no hay pruebas, todavía es solo diseño. Lo comprobaré al montar la red en la Fase 3.
+- Objetivo: diseñar la red del laboratorio (fase 2).
+- Acciones realizadas: Ese día no pude ir a clase. Lo hice en casa con la teoría de redes del profesor y lo que me contaron mis compañeros. Rellené el diseño de red con el nombre del nodo, los dos bridges, las IPs, el gateway, el DNS y los puertos.
+- Decisiones y motivos: Uso dos redes. `vmbr0` va por NAT y sirve para salir a Internet, y `vmbr1` va por solo anfitrión y es la red del laboratorio, así no toco la red del instituto. Usé la red `192.168.56.0/24`, con el nodo en la `.10`, `srv-aso` en la `.20` y `cli-linux` en la `.30`, y el DNS `8.8.8.8`, como dijo el profesor.
+- Pruebas y resultados: No hay pruebas, era solo el diseño.
 - Documentos o evidencias: [Diseño de red](02-diagrama-red.md).
-- Incidencias y solucion o estado pendiente: Ninguna. No hago el diagrama ni las medidas de aislamiento porque el profesor ha indicado que se saltan en esta parte.
-- Siguiente paso: Empezar la Fase 3 creando la VM de Proxmox en VirtualBox con los dos adaptadores (NAT y solo-anfitrión).
+- Incidencias y solucion o estado pendiente: El diagrama y el aislamiento se dejaron para más adelante, según lo que dijo el profesor.
+- Siguiente paso: crear la VM en VirtualBox e instalar Proxmox.
 
-Anadir una entrada con esta estructura en cada sesion. El historial de
-GitHub registra los commits; no hace falta incluir el hash del propio
-commit dentro de su entrada de bitacora.
+## Sesion 04 - 27/10/2026
+
+- Objetivo: instalar Proxmox en una VM de VirtualBox (fase 3).
+- Acciones realizadas: En mi PC de clase (i3-12100 y 16 GB de RAM) creé la VM `pve-rubio` con 4 vCPU, 8 GB de RAM y un disco de 80 GB, con un adaptador NAT y otro solo anfitrión. Activé PAE/NX, Nested VT-x y Nested Paging y puse el controlador en virtio-scsi. Instalé Proxmox VE 9.2 con el nodo `pve-drubio` en la `10.0.2.15` y añadí a mano `vmbr1` con la `192.168.56.10`.
+- Decisiones y motivos: Instalé con ext4, que es lo que viene por defecto. A la VM le di solo la mitad de los hilos y de la RAM para que el PC no se quedara sin recursos.
+- Pruebas y resultados: Entré al panel desde el navegador del PC en `https://192.168.56.10:8006`. Dentro del nodo, `grep -c vmx` da 8 y existe `/dev/kvm`, o sea, la virtualización anidada llega a Proxmox.
+- Documentos o evidencias: [Instalación de Proxmox](03-instalacion-proxmox.md).
+- Incidencias y solucion o estado pendiente: `vmbr1` no cogía IP porque escribí mal la IP y puse `bride` en vez de `bridge`. Lo corregí y reinicié la red. Queda pendiente arrancar una máquina dentro de Proxmox para confirmar del todo que KVM funciona.
+- Siguiente paso: configurar la base del nodo (fase 4).
+
+## Sesion 05 - 03/11/2026
+
+- Objetivo: subir la documentación de la instalación y hacer los puntos 1 y 2 de la fase 4.
+- Acciones realizadas: Subí las capturas y el documento de la fase 3. Miré los discos, el LVM y los almacenamientos del nodo, creé el almacenamiento `copias-pi` para las copias y comprobé el espacio libre del PC. Relacioné `nic0` y `nic1` con los adaptadores de VirtualBox por la MAC, puse el adaptador 2 en modo promiscuo y cambié los repositorios enterprise por el no-subscription.
+- Decisiones y motivos: Las copias van al mismo disco porque no hay otro, y he dejado anotado el riesgo. Quité los repositorios enterprise porque son de pago y daban error.
+- Pruebas y resultados: `copias-pi` sale activo, el nodo resuelve `deb.debian.org` y `apt update` ya funciona sin errores.
+- Documentos o evidencias: [Instalación y configuración base](03-instalacion-proxmox.md).
+- Incidencias y solucion o estado pendiente: Una captura se subió con el nombre `.png.png` y no se veía; la subí bien y borré la mala. Hay que vigilar el espacio del PC, porque el VDI puede crecer hasta 80 GB y solo quedan 71 GB libres.
+- Siguiente paso: actualizar la ficha, el inventario y el diseño de red con los datos reales y empezar la plantilla Linux (fase 5).
 
 [Volver al indice](../README.md)
