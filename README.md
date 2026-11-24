@@ -1,16 +1,15 @@
 # Proyecto Intermodular: nodo Proxmox individual
 
-Alumno/a: rubio_daniel
-
+Alumno/a: Daniel Rubio
 URL GitHub: https://github.com/danixnode/pi-proxmox-danielrubio
 
 ## Objetivo
 
-Montar un laboratorio con Proxmox para desplegar y administrar un servicio Linux.
+Montar un laboratorio con Proxmox para desplegar y administrar un servicio Linux, automatizando tareas con Bash y Ansible.
 
 ## Modalidad
 
-Modalidad virtualizada.
+Virtualizada: Proxmox VE dentro de una máquina virtual de VirtualBox, en mi PC de clase.
 
 ## Indice de documentacion
 
@@ -30,12 +29,13 @@ Modalidad virtualizada.
 
 ## Estado
 
-- [ ] GitHub creado y primer commit publicado
-- [ ] URL entregada y acceso docente comprobado
-- [ ] Modalidad indicada
-- [ ] Inventario
+- [x] GitHub creado y primer commit publicado
+- [x] URL entregada y acceso docente comprobado
+- [x] Modalidad indicada
+- [x] Inventario
 - [ ] Diagrama de red
-- [ ] Instalacion Proxmox
+- [x] Instalacion Proxmox
+- [x] Configuracion base del nodo (puntos 1 y 2)
 - [ ] Plantilla Linux
 - [ ] VMs/LXC
 - [ ] Servicio ASO
@@ -49,12 +49,11 @@ Modalidad virtualizada.
 
 | Elemento | Estado |
 |---|---|
-| Repositorio GitHub | Creado |
-| Documentación inicial | En progreso |
-| Nodo Proxmox | Pendiente de instalación |
+| Repositorio GitHub | Creado y entregado |
+| Documentación | Fases 0 a 4 subidas |
+| Nodo Proxmox | Instalado y configurado (pve-drubio, 192.168.56.10) |
+| Red del laboratorio | 192.168.56.0/24, con salida a Internet por NAT |
 
 ## Comando de comprobación
 
-​```bash
-git status
-​```
+    git status
